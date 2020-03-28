@@ -1,7 +1,7 @@
 //Part 0 ------------------Constants & Variables------------------------
 let objArray;
 let lastStride = "R";
-let player = {x: -10};
+let player = {x: -5};
 let stopMoveFlag = false;
 //Part 0 ---------------------------------------------------------------
 
@@ -48,14 +48,14 @@ function move() {
 function strideL() {
     stopMoveFlag = false;
     lastStride = "L";
-    document.getElementById("player").style.top = "47.3vh";
+    document.getElementById("player").style.top = "72.3vh";
     document.getElementById("player").src = "Images/stride1.gif";
     setTimeout(move, 2);
     setTimeout(function () {
         stopMoveFlag = true;
     }, 2450);
     setTimeout(function () {
-        document.getElementById("player").style.top = "47vh";
+        document.getElementById("player").style.top = "72vh";
         document.getElementById("player").src = "Images/stop1.png";
     }, 2500);
     
@@ -63,14 +63,14 @@ function strideL() {
 function strideR() {
     stopMoveFlag = false;
     lastStride = "R";
-    document.getElementById("player").style.top = "47.3vh";
+    document.getElementById("player").style.top = "72.3vh";
     document.getElementById("player").src = "Images/stride2.gif";
     move();
     setTimeout(function () {
         stopMoveFlag = true;
     }, 2400);
     setTimeout(function () {
-        document.getElementById("player").style.top = "47vh";
+        document.getElementById("player").style.top = "72vh";
         document.getElementById("player").src = "Images/stop2.png";
     }, 2400);
 }
