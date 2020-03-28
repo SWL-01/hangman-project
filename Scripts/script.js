@@ -1,8 +1,9 @@
 //Part 0 ------------------Constants & Variables------------------------
 let objArray;
-let lastStride = "R";
-let player = {x: -5};
-let stopMoveFlag = false;
+let lastStride = "R"; //The last leg the player swung to walk, maintains consistent walking animation.
+let player = {x: -5}; //Players location on the screen
+let stopMoveFlag = false; //Controls player motion
+let stepCount = 0; //At 3 steps, player reaches computer and the game screen appears on a delay.
 //Part 0 ---------------------------------------------------------------
 
 //Part A ---------Generates buttons and disables onclick event----------
@@ -14,8 +15,11 @@ function controller(btn) {
 
         if (lastStride == "R") {
             strideL();
-        } else {
+        } else if (lastStride == "L") {
             strideR();
+        }
+        if (stepCount == 3) {
+            setTimeout(openScreen,3000);
         }
     }
 }
@@ -39,13 +43,14 @@ function move() {
     if (stopMoveFlag) {
         return;
     }
-    let newX = player.x + 0.02;
+    let newX = player.x + 0.01;
     player.x = newX;
     document.getElementById("player").style.left = newX + "vw";
     setTimeout(move, 2);
 }
 
 function strideL() {
+    stepCount++;
     stopMoveFlag = false;
     lastStride = "L";
     document.getElementById("player").style.top = "72.3vh";
@@ -61,6 +66,7 @@ function strideL() {
     
 }
 function strideR() {
+    stepCount++;
     stopMoveFlag = false;
     lastStride = "R";
     document.getElementById("player").style.top = "72.3vh";
@@ -76,6 +82,32 @@ function strideR() {
 }
 //Part B ---------------------------------------------------------------
 
-//Part C ----------------
+//Part C ----------------Word Generator and Input Handler---------------
+function openScreen () {
+    document.getElementById("game").style.visibility = "visible";
+    document.getElementById("box").style.visibility = "visible";
+}
+
 
 //Part C ---------------------------------------------------------------
+
+//Part D -----------------------------End Game--------------------------
+//If the player wins, they get teleported into the ship.
+function teleport () {
+    document.getElementById("port").style.visibility = "visible";
+    document.getElementById("port").src= "Images/portal.gif";
+    document.getElementById("game").style.visibility = "hidden";
+    document.getElementById("box").style.visibility = "hidden";
+    setTimeout(function () {
+        document.getElementById("player").style.visibility = "hidden";
+    }, 600);
+    setTimeout(function () {
+        document.getElementById("player").style.visibility = "hidden";
+        document.getElementById("port").style.visibility = "hidden";
+        document.getElementById("port").src= "";
+    }, 1200);
+}
+
+//If the player loses, <undecided>
+
+//Part D ---------------------------------------------------------------

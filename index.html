@@ -25,7 +25,7 @@
                 position: absolute;
                 top: 93vh;
                 left: 25vw;
-                z-index: 2;
+                z-index: 4;
             }
             #player {
                 position: absolute;
@@ -39,6 +39,33 @@
                 top:15vh;
                 left:60vw;
             }
+            #port {
+                position: absolute;
+                visibility: hidden;
+                top:65vh;
+                left:8vw;
+                width: 20%;
+                height: 35%;
+                z-index: 3;
+            }
+            #platform {
+                position: absolute;
+                top:65vh;
+                left:11vw;
+                z-index: 2;
+            }
+            #game {
+                position: absolute;
+                visibility: hidden;
+            }
+            #box {
+                position: absolute;
+                visibility: hidden;
+                z-index: 5;
+                top:12vh;
+                background-color: black;
+                color: lime;
+            }
         </style>
     </head>
     <body id="bck">
@@ -46,6 +73,12 @@
         <div id="buttons"></div>
         <img id="player" src="Images/start.png">
         <img id="rocket" src="Images/rocket.png">
+        <div id="screen">
+            <img id="game" src="Images/gamescreen.png">
+            <input type="text" id="box">
+        </div>
+        <img id="port">
+        <img id="platform" src="Images/platform.png">
         <script src="Scripts/script.js">
 
         </script>
