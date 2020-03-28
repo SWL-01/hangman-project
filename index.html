@@ -2,10 +2,14 @@
 <html>
     <head>
         <style>
+            html {
+                overflow: hidden;
+            }
             #bck {
                 background-image: url(Images/main.png);
                 background-size: cover;
                 background-repeat: no-repeat;
+
             }
             .dead {
                 background-color:darkslategrey;
@@ -19,14 +23,25 @@
             }
             #buttons {
                 position: absolute;
-                top: 90vh;
+                top: 93vh;
                 left: 25vw;
+                z-index: 2;
+            }
+            #player {
+                position: absolute;
+                top:47vh;
+                left:-10vw;
+            }
+            #gate {
+
             }
         </style>
     </head>
     <body id="bck">
         <!-- The div holds the letter buttons at the bottom middle of the screen. -->
-        <div id="buttons"></div> 
+        <div id="buttons"></div>
+        <img id="player" src="Images/start.png">
+        <img id="gate">
         <script src="Scripts/script.js">
 
         </script>
