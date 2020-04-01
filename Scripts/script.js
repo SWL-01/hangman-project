@@ -3,12 +3,9 @@ const VOLUME = 0.5; //Main theme volume constant.
 const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
-let lastStride = "R"; //The last leg the player swung to walk, maintains consistent walking animation.
-let player = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65}; //Players location on the screen
-let origin = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65}; //For restarting back to origin positions.
+let player = {x: 5, y: 72, platX: 11, platY: 65}; //Players location on the screen
+let origin = {x: 5, y: 72, platX: 11, platY: 65}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
-let stopMoveFlag = false; //Controls player motion
-let stepCount = 0; //At 3 steps, player reaches computer and the game screen appears on a delay.
 let storeWord = "MOTION"; //Stores the word input by the firebase.
 let wordArray = []; //Stores the word as dashes at each index that get replaced with correctly guessed letters.
 let shakeCount = 0; //Used to stop shaking after launch.
@@ -44,12 +41,10 @@ function startGame() {
 }
 
 function restart() {
-    lastStride = "R";
-    stepCount = 0;
     tries = 7;
     shakeCount = 3000;
 
-    player = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65};
+    player = {x: -5, y: 72, platX: 11, platY: 65};
 
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -65,7 +60,6 @@ function restart() {
     while (clearDiv.firstChild) {
         clearDiv.removeChild(clearDiv.lastChild);
       }
-
     startGame();
 }
 
@@ -90,13 +84,6 @@ function controller(btn, letter) {
         if (stepCount > 3) {
             return;
         }
-        if (result) {
-            if (lastStride == "R") {
-                strideL();
-            } else if (lastStride == "L") {
-                strideR();
-            }
-        }
         if (stepCount == 3) {
             warningS.src = "Audio/panel.mp3";
             warningS.volume = VOLUME - OPENOFFSET;
@@ -106,7 +93,6 @@ function controller(btn, letter) {
             setTimeout(openScreen,3500);
             stepCount++;
         }
-        
     }
 }
 
@@ -130,58 +116,6 @@ function buttonMaker() {
     }
 }
 //Part A ---------------------------------------------------------------
-
-//Part B ---------------Controls Player Walking Animation---------------
-//Move handles position changes of the player character.
-function move() {
-    if (stopMoveFlag) {
-        return;
-    }
-    player.x += 0.01;
-    player.bubbleX += 0.01;
-    player.textX += 0.01;
-
-    document.getElementById("player").style.left = player.x + "vw";
-    document.getElementById("thought").style.left = player.bubbleX + "vw";
-    document.getElementById("quest").style.left = player.textX + "vw";
-    document.getElementById("define").style.left = player.textX + "vw";
-    document.getElementById("dash").style.left = player.textX + "vw";
-    setTimeout(move, 2);
-}
-
-//StrideL and StrideR update the players image source to display consistent walking animation.
-function strideL() {
-    stepCount++;
-    stopMoveFlag = false;
-    lastStride = "L";
-    document.getElementById("player").style.top = "72.3vh";
-    document.getElementById("player").src = "Images/stride1.gif";
-    setTimeout(move, 2);
-    setTimeout(function () {
-        stopMoveFlag = true;
-    }, 2450);
-    setTimeout(function () {
-        document.getElementById("player").style.top = "72vh";
-        document.getElementById("player").src = "Images/stop1.png";
-    }, 2500);
-    
-}
-function strideR() {
-    stepCount++;
-    stopMoveFlag = false;
-    lastStride = "R";
-    document.getElementById("player").style.top = "72.3vh";
-    document.getElementById("player").src = "Images/stride2.gif";
-    move();
-    setTimeout(function () {
-        stopMoveFlag = true;
-    }, 2400);
-    setTimeout(function () {
-        document.getElementById("player").style.top = "72vh";
-        document.getElementById("player").src = "Images/stop2.png";
-    }, 2400);
-}
-//Part B ---------------------------------------------------------------
 
 //Part C ----------------Word Generator and Input Handler---------------
 //Opens the command window for when player reaches the computer.
@@ -249,7 +183,7 @@ function win() {
     warningS.src = "Audio/granted.mp3";
     warningS.volume = VOLUME - OPENOFFSET;
     warningS.play();
-            
+
     //Hides elements on screen
     document.getElementById("thought").style.visibility = "hidden";
     document.getElementById("quest").style.visibility = "hidden";
@@ -264,7 +198,7 @@ function win() {
 
     setTimeout(function () {
         shake();
-    }, 3700);
+    }, 4200);
 }
 //Part C ---------------------------------------------------------------
 
@@ -302,7 +236,6 @@ function shake () {
     if (shakeCount > 3000) {
         return;
     }
-    console.log(shakeCount);
     let range1 = Math.random() * SHAKE - SHAKE;
     let range2 = Math.random() * SHAKE - SHAKE;
     let range3 = Math.random() * SHAKE - SHAKE;
