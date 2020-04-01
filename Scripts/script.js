@@ -38,6 +38,7 @@ function startGame() {
     buttonMaker();
     pullWord();
     createDash();
+    liftoff();
 }
 
 function restart() {
@@ -187,6 +188,33 @@ function win() {
     setTimeout(function () {
         shake();
     }, 4200);
+}
+
+// Rocket liftoff
+function liftoff() {
+    let rocketShip = document.getElementById("rocket");
+    let smoke = document.getElementById("smoke");
+    smoke.style.visibility="visible";
+    let rocketPos = 22;
+    let smokePos = 79;
+    let id = setInterval(rocketUp, 50);
+    let id2 = setInterval(smokeUp, 50);
+    function rocketUp() {
+        if (rocketPos == -300) {
+            clearInterval(id);
+        } else {
+            rocketPos--;
+            rocketShip.style.top = rocketPos + 'vh';
+        }
+    }
+    function smokeUp() {
+        if (smokePos == -10) {
+            clearInterval(id2);
+        } else {
+            smokePos--;
+            smoke.style.top = smokePos + 'vh';
+        }
+    } 
 }
 //Part C ---------------------------------------------------------------
 
