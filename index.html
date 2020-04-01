@@ -9,22 +9,22 @@
                 background-image: url(Images/main.png);
                 background-size: cover;
                 background-repeat: no-repeat;
-
             }
             .dead {
                 background-color:darkslategrey;
                 color: white;
-                width: 2vw;
-                height: 4vh;
+                width: 4vw;
+                height: 6vh;
             }
             .btnz {
-                width: 2vw;
-                height: 4vh;
+                width: 4vw;
+                height: 6vh;
             }
             #buttons {
                 position: absolute;
-                top: 93vh;
-                left: 25vw;
+                top: 73vh;
+                width: 30vw;
+                left: 38vw;
                 z-index: 4;
             }
             #player {
@@ -36,8 +36,9 @@
             }
             #rocket {
                 position: absolute;
-                top:15vh;
+                top:22vh;
                 left:60vw;
+                height: 80%;
             }
             #port {
                 position: absolute;
@@ -52,6 +53,7 @@
                 position: absolute;
                 top:65vh;
                 left:11vw;
+                height: 35%;
                 z-index: 2;
             }
             #game {
@@ -59,13 +61,18 @@
                 visibility: hidden;
                 top:22vh;
                 left:50vw;
+                width: 40vw;
+                height: 50vh;
             }
             #box {
                 position: absolute;
                 visibility: hidden;
                 z-index: 5;
-                top:34vh;
+                font-size: 1.5vw;
+                top:42vh;
                 left:50vw;
+                width: 15vw;
+                height: 3vh;
                 background-color: black;
                 color: lime;
             }
@@ -85,29 +92,36 @@
             #quest{
                 position: absolute;
                 visibility: hidden;
-                top: 20vh;
+                top: 13vh;
                 left:7vw;
-                font-size: 20px;
+                font-size: 2vw;
+                height: 85%;
+                width: 20%;
             }
             #dash {
                 position: absolute;
                 visibility: hidden;
-                top: 25vh;
+                top: 22vh;
                 left:7vw;
-                font-size: 20px;
+                font-size: 2vw;
+                height: 85%;
+                width: 20%;
             }
             #define {
                 position: absolute;
                 visibility: hidden;
-                top: 30vh;
+                top: 28vh;
                 left:7vw;
-                font-size: 20px;
+                font-size: 1.5vw;
+                height: 85%;
+                width: 25%;
             }
             #thought {
                 position: absolute;
                 visibility: hidden;
                 top:-2vh;
-                left:-4vw;
+                left:0vw;
+                height: 85%;
             }
         </style>
     </head>
@@ -119,15 +133,17 @@
 
         <img id="player" src="Images/start.png">
         <img id="rocket" src="Images/rocket.png">
-        <img id="thought" src="Images/think.png">
+        <img id="rocket" src="Images/rocket.png">
+        <img id="thought" src="Images/thinker.png">
         
         <div id="screen">
             <p id="quest"><i>What is the password to the teleporter?</i></p>
             <p id="dash"></p>
-            <p id="define">Definition: Movement.</p>
-            <img id="game" src="Images/gamescreen.png">
-            <input type="text" id="box" onkeydown="enterPassword(this)">
+            <p id="define">Definition: is the set of physical phenomena associated with the presence and motion of electric charge.</p>
         </div>
+
+        <img id="game" src="Images/gamescreen.png">
+        <input type="text" id="box" onkeydown="enterPassword(this)">
 
         <img id="port">
         <img id="platform" src="Images/platform.png">

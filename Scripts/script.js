@@ -4,8 +4,8 @@ const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
 let lastStride = "R"; //The last leg the player swung to walk, maintains consistent walking animation.
-let player = {x: -5, y: 72, textX: 7, bubbleX: -4, platX: 11, platY: 65}; //Players location on the screen
-let origin = {x: -5, y: 72, textX: 7, bubbleX: -4, platX: 11, platY: 65}; //For restarting back to origin positions.
+let player = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65}; //Players location on the screen
+let origin = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
 let stopMoveFlag = false; //Controls player motion
 let stepCount = 0; //At 3 steps, player reaches computer and the game screen appears on a delay.
@@ -49,7 +49,7 @@ function restart() {
     tries = 7;
     shakeCount = 3000;
 
-    player = {x: -5, y: 72, textX: 7, bubbleX: -4, platX: 11, platY: 65};
+    player = {x: -5, y: 72, textX: 7, bubbleX: 0, platX: 11, platY: 65};
 
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -67,6 +67,10 @@ function restart() {
       }
 
     startGame();
+}
+
+function endClick() {
+
 }
 //Part ! ---------------------------------------------------------------
 
@@ -257,6 +261,10 @@ function win() {
     setTimeout(function () {
         teleport();
     }, 3000);
+
+    setTimeout(function () {
+        shake();
+    }, 3700);
 }
 //Part C ---------------------------------------------------------------
 
