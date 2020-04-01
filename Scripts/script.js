@@ -71,6 +71,7 @@ function restart() {
 //Part ! ---------------------------------------------------------------
 
 //Part A ---------Generates buttons and disables onclick event----------
+//Handles button clicks and current game state changes from the click.
 function controller(btn, letter) {
     return function buttonClick() {
         shakeCount = 0;
@@ -105,6 +106,7 @@ function controller(btn, letter) {
     }
 }
 
+//Button constructor.
 function Button(i) {
     this.btn = document.createElement("BUTTON");
     this.btn.setAttribute('id', String.fromCharCode(65 + i));
@@ -115,6 +117,7 @@ function Button(i) {
     document.getElementById("buttons").appendChild(this.btn);
 }
 
+//Button generator.
 function buttonMaker() {
     let i = 0;
     let n = 26
@@ -125,6 +128,7 @@ function buttonMaker() {
 //Part A ---------------------------------------------------------------
 
 //Part B ---------------Controls Player Walking Animation---------------
+//Move handles position changes of the player character.
 function move() {
     if (stopMoveFlag) {
         return;
@@ -141,6 +145,7 @@ function move() {
     setTimeout(move, 2);
 }
 
+//StrideL and StrideR update the players image source to display consistent walking animation.
 function strideL() {
     stepCount++;
     stopMoveFlag = false;
@@ -235,6 +240,7 @@ function enterPassword(ele) {
     }
 }
 
+//Activates the win state of the game by hiding elements, teleporting player, and launching rocket.
 function win() {
     warningS.src = "Audio/granted.mp3";
     warningS.volume = VOLUME - OPENOFFSET;
@@ -282,7 +288,7 @@ function throwAlert() {
     }
 }
 
-//If the player wins, they get teleported into the ship.
+//Shakes elements on the screen at the time of rocket launch.
 function shake () {
     shakeCount++;
     if (shakeCount > 3000) {
@@ -302,6 +308,7 @@ function shake () {
     setTimeout(shake,5);
 }
 
+//If the player wins, they get teleported into the ship.
 function teleport () {
     //Portal gif starts
     document.getElementById("port").style.visibility = "visible";
