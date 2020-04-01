@@ -3,8 +3,8 @@ const VOLUME = 0.5; //Main theme volume constant.
 const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
-let player = {x: 5, y: 72, platX: 11, platY: 65}; //Players location on the screen
-let origin = {x: 5, y: 72, platX: 11, platY: 65}; //For restarting back to origin positions.
+let player = {x: 5, y: 72, platX: 4, platY: 65}; //Players location on the screen
+let origin = {x: 5, y: 72, platX: 4, platY: 65}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
 let storeWord = "MOTION"; //Stores the word input by the firebase.
 let wordArray = []; //Stores the word as dashes at each index that get replaced with correctly guessed letters.
@@ -44,7 +44,7 @@ function restart() {
     tries = 7;
     shakeCount = 3000;
 
-    player = {x: -5, y: 72, platX: 11, platY: 65};
+    player = {x: 5, y: 72, platX: 4, platY: 65};
 
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -80,18 +80,6 @@ function controller(btn, letter) {
         if (!result) {
             tries--;
             throwAlert();
-        }
-        if (stepCount > 3) {
-            return;
-        }
-        if (stepCount == 3) {
-            warningS.src = "Audio/panel.mp3";
-            warningS.volume = VOLUME - OPENOFFSET;
-            setTimeout(function () {
-                warningS.play();
-            }, 2000);
-            setTimeout(openScreen,3500);
-            stepCount++;
         }
     }
 }
