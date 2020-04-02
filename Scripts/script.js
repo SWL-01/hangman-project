@@ -6,9 +6,21 @@ const SHAKE = 0.25; //Shake value.
 let player = {x: 5, y: 72, platX: 4, platY: 65}; //Players location on the screen
 let origin = {x: 5, y: 72, platX: 4, platY: 65}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
-let storeWord = "MOTION"; //Stores the word input by the firebase.
-let wordArray = []; //Stores the word as dashes at each index that get replaced with correctly guessed letters.
+let storeWord = ""; //Stores the word input by the firebase.
+let wordDashes = []; //Array containing dashes matching word-length.
 let shakeCount = 0; //Used to stop shaking after launch.
+let userScore = 0;
+
+//---------------------------------Word List------------------------------
+//Nested Array containing word and it's accompanying definition.
+let wordArray = [["spaceship","ships made by Elon Musk"],["alien","Space dude with creepy eyes"],
+["astronaut","Person who is trained to travel in a spaceship"],["lunar","of, determined by, or resembling the moon."],
+["universe","EVERYTHING"],["committee","a group of people appointed for a specific function, typically consisting of members of a larger group."],
+["spaceship","ships made by Elon Musk"],["gravity","the force that attracts a body toward the center of the earth"],
+["comet","a celestial object consisting of a nucleus of ice and dust"],["planet","a celestial body moving in an elliptical orbit around a star."],
+["constellation","a group of stars forming a recognizable pattern"],["milkywaygalaxy","the galaxy we live in"],
+["spaceship","the branch of science which deals with celestial objects, space, and the physical universe as a whole"]];
+
 
 let themeOST = document.getElementById("theme"); //The main background song; change source in HTML, not here.
 let warningS = document.getElementById("warning"); //Warning sound element; changes source repeatedly for each alert.
@@ -35,9 +47,8 @@ function startGame() {
     document.getElementById("quest").style.visibility = "visible";
     document.getElementById("define").style.visibility = "visible";
     document.getElementById("dash").style.visibility = "visible";
+    getWords();
     buttonMaker();
-    pullWord();
-    createDash();
     liftoff();
 }
 
@@ -45,7 +56,8 @@ function restart() {
     tries = 7;
     shakeCount = 3000;
 
-    player = {x: 5, y: 72, platX: 4, platY: 65};
+    player = {x: -5, y: 72, platX: 4, platY: 65};
+    document.getElementById("buttons").style.visibility = "visible";
 
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -64,9 +76,12 @@ function restart() {
     startGame();
 }
 
-function endClick() {
-
+//Score display function
+function endScreen() {
+    document.querySelector("#scoreOutput").innerHTML = "Score: " + userScore;
+    $('#endModal').modal('show');
 }
+
 //Part ! ---------------------------------------------------------------
 
 //Part A ---------Generates buttons and disables onclick event----------
@@ -79,7 +94,8 @@ function controller(btn, letter) {
         btn.onclick = "";
         let result = updateDash(letter);
         if (!result) {
-            tries--;
+            userScore -= 1; //decerement score on failed guess
+            tries--; 
             throwAlert();
         }
     }
@@ -114,18 +130,21 @@ function openScreen () {
     document.getElementById("box").style.visibility = "visible";
 }
 
-//Not yet working. Pulls word from firebase.
-function pullWord () {
-    return 0;
+//Chooses random word and accompanying definition from Word array.
+function getWords() {
+    let index = Math.floor(Math.random() * (wordArray.length - 1));
+    storeWord = wordArray[index][0].toUpperCase();
+    document.getElementById("define").innerHTML = wordArray[index][1];
+    console.log(index);
+    createDash(storeWord);
 }
 
 //Takes word input and creates dashed lines of equal size.
-function createDash() {
+function createDash(wordToGuess) {
     document.getElementById("dash").innerHTML = "";
-    let i;
-    for (i = 0; i < storeWord.length; i++) {
-        wordArray[i] = "- ";
-        document.getElementById("dash").innerHTML += wordArray[i];
+    for (let i = 0; i < wordToGuess.length; i++) {
+        wordDashes[i] = "- ";
+        document.getElementById("dash").innerHTML += wordDashes[i];
     }
 }
 
@@ -137,11 +156,12 @@ function updateDash(letter) {
     let count = 0;
     for (i = 0; i < storeWord.length; i++) {
         if (storeWord[i] == letter) {
-            wordArray[i] = letter + " ";
+            wordDashes[i] = letter + " ";
             letterFlag = true;
+            userScore += 2; //increment score on failed guess
         }
-        document.getElementById("dash").innerHTML += wordArray[i];
-        if (wordArray[i] != "- ") {
+        document.getElementById("dash").innerHTML += wordDashes[i];
+        if (wordDashes[i] != "- ") {
             count++;
         }
         if (count == storeWord.length) {
@@ -243,6 +263,7 @@ function throwAlert() {
             themeOST.volume = VOLUME - OPENOFFSET;
             warningS.play();
             endGame();
+            
     }
 }
 
@@ -291,12 +312,9 @@ function endGame () {
     document.getElementById("define").style.visibility = "hidden";
     document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
+    document.getElementById("buttons").style.visibility = "hidden";
 
     shake();
 }
 
-//Score display function
-function scoreScreen () {
-
-}
 //Part D ---------------------------------------------------------------
