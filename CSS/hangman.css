@@ -127,3 +127,44 @@ html {
     left:7vw;
     height: 85%;
 }
+#endimg {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: 40%;
+    width: 20%;
+    visibility: hidden;
+}
+#answer{
+    position: absolute;
+    top: -3vh;
+    left: 12vw;
+    height: 50%;
+    width: 50%;
+    font-size: 1.5vw;
+    font-family: fantasy;
+    visibility: hidden;
+    text-align: center;
+}
+
+#shout {
+    position: absolute;
+    visibility: hidden;
+    top: 4vh;
+    left: 40vw;
+    height: 43%;
+}
+
+#endmessage {
+    position: absolute;
+    top: 20%;
+    width: 30vw;
+    height: 43vh;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+}

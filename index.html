@@ -99,7 +99,10 @@
         <img id="smoke" src="Images/smoke.png">
         <img id="smoke" src="Images/smoke.png">
         <img id="thought" src="Images/thinker.png">
-        
+        <img id= "endimg" src="Images/panic.png">
+        <img id="shout" src="Images/shout.png">
+        <img id="game" src="Images/gamescreen.png">
+
 
         <div id="screen">
             <p id="quest"><i>What is the password to the teleporter?</i></p>
@@ -107,7 +110,12 @@
             <p id="define">Definition: is the set of physical phenomena associated with the presence and motion of electric charge.</p>
         </div>
 
-        <img id="game" src="Images/gamescreen.png">
+        <div id = "endmessage">
+            <p id= "answer">Origninal answer of the question</p>
+            <img id ="shout">
+        </div>
+
+        
         <input type="text" id="box" onkeydown="enterPassword(this)">
 
         <img id="port">
@@ -123,6 +131,10 @@
 
         <audio id="warning">
             <source src="" type="audio/mpeg">
+        </audio>
+
+        <audio id = "fail">
+            <source src = "Audio/no god.mp3" type="audio/mpeg">
         </audio>
 
         <!-- Scripts -->

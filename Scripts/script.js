@@ -10,6 +10,7 @@ let storeWord = ""; //Stores the word input by the firebase.
 let wordDashes = []; //Array containing dashes matching word-length.
 let shakeCount = 0; //Used to stop shaking after launch.
 let userScore = 0;
+let index;
 
 //---------------------------------Word List------------------------------
 //Nested Array containing word and it's accompanying definition.
@@ -24,6 +25,7 @@ let wordArray = [["spaceship","ships made by Elon Musk"],["alien","Space dude wi
 
 let themeOST = document.getElementById("theme"); //The main background song; change source in HTML, not here.
 let warningS = document.getElementById("warning"); //Warning sound element; changes source repeatedly for each alert.
+let failsound = document.getElementById("fail"); // The sound when user lose.
 
 //Part F -----------------------------Firebase--------------------------
 //Lets not push the firebase stuff up. I read its a security issue.
@@ -55,10 +57,14 @@ function startGame() {
 function restart() {
     tries = 7;
     shakeCount = 3000;
+    failsound.volume = 0;
 
     player = {x: -5, y: 72, platX: 4, platY: 65};
     document.getElementById("buttons").style.visibility = "visible";
-
+    document.getElementById("shout").style.visibility = "hidden";
+    document.getElementById("answer").style.visibility = "hidden";
+    document.getElementById("endimg").style.visibility ="hidden";
+    
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
     document.getElementById("quest").style.left = origin.textX + "vw";
@@ -132,11 +138,12 @@ function openScreen () {
 
 //Chooses random word and accompanying definition from Word array.
 function getWords() {
-    let index = Math.floor(Math.random() * (wordArray.length - 1));
+    index = Math.floor(Math.random() * (wordArray.length - 1));
     storeWord = wordArray[index][0].toUpperCase();
     document.getElementById("define").innerHTML = wordArray[index][1];
     console.log(index);
     createDash(storeWord);
+    endGamemessage();
 }
 
 //Takes word input and creates dashed lines of equal size.
@@ -304,7 +311,15 @@ function teleport () {
     }, 1200);
 }
 
-//If the player loses, <undecided>
+//End game message according to string value of question.
+function endGamemessage() {
+    let indexnum = index;
+    let answer = wordArray[indexnum][0].toUpperCase()
+    document.getElementById("answer").innerHTML="Oh, right!" + "<br>" + "The password was " + answer + "!";
+    console.log(answer);
+}
+
+//If the player loses, appear endgame img and the answer of the question.
 function endGame () {
     document.getElementById("thought").style.visibility = "hidden";
     document.getElementById("quest").style.visibility = "hidden";
@@ -313,8 +328,17 @@ function endGame () {
     document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
     document.getElementById("buttons").style.visibility = "hidden";
+    document.getElementById("start").style.visibility = "hidden";
+    document.getElementById("endimg").style.visibility ="visible";
+    document.getElementById("player").style.visibility = "hidden";
+    document.getElementById("platform").style.visibility = "hidden";
+    document.getElementById("shout").style.visibility = "visible";
+    document.getElementById("answer").style.visibility = "visible";
 
-    shake();
+    failsound.currentTime = 0;
+    failsound.volume = VOLUME - OPENOFFSET;
+    failsound.play();
+    endGamemessage();
 }
 
 //Part D ---------------------------------------------------------------
