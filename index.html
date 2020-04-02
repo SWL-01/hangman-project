@@ -1,149 +1,106 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            html {
-                overflow: hidden;
-            }
-            #bck {
-                background-image: url(Images/main.png);
-                background-size: cover;
-                background-repeat: no-repeat;
-            }
-            .dead {
-                background-color:darkslategrey;
-                color: white;
-                width: 4vw;
-                height: 6vh;
-            }
-            .btnz {
-                width: 4vw;
-                height: 6vh;
-            }
-            #buttons {
-                position: absolute;
-                top: 73vh;
-                width: 30vw;
-                left: 38vw;
-                z-index: 4;
-            }
-            #player {
-                position: absolute;
-                top:72vh;
-                left:5vw;
-                width: 10%;
-                height: 20%;
-            }
-            #rocket {
-                position: absolute;
-                top:22vh;
-                left:80vw;
-                height: 80%;
-                width: 20%;
-            }
-            #smoke {
-                position: absolute;
-                top:89vh;
-                left:65vw;
-                height: 120%;
-                visibility: hidden;
-            }
-            #port {
-                position: absolute;
-                visibility: hidden;
-                top:65vh;
-                left:8vw;
-                width: 20%;
-                height: 35%;
-                z-index: 3;
-            }
-            #platform {
-                position: absolute;
-                top:65vh;
-                left:4vw;
-                height: 35%;
-                z-index: 2;
-            }
-            #game {
-                position: absolute;
-                visibility: hidden;
-                top:22vh;
-                left:50vw;
-                width: 40vw;
-                height: 50vh;
-            }
-            #box {
-                position: absolute;
-                visibility: hidden;
-                z-index: 5;
-                font-size: 1.5vw;
-                top:42vh;
-                left:50vw;
-                width: 15vw;
-                height: 3vh;
-                background-color: black;
-                color: lime;
-            }
-            #start {
-                position: absolute;
-                z-index: 5;
-                top: 0vh;
-                left: 45vw;
-            }
-            #restart {
-                position: absolute;
-                visibility: hidden;
-                z-index: 5;
-                top: 0vh;
-                left: 45vw;
-            }
-            #quest{
-                position: absolute;
-                visibility: hidden;
-                top: 13vh;
-                left:14vw;
-                font-size: 2vw;
-                height: 85%;
-                width: 20%;
-            }
-            #dash {
-                position: absolute;
-                visibility: hidden;
-                top: 22vh;
-                left:14vw;
-                font-size: 2vw;
-                height: 85%;
-                width: 20%;
-            }
-            #define {
-                position: absolute;
-                visibility: hidden;
-                top: 28vh;
-                left:14vw;
-                font-size: 1.5vw;
-                height: 85%;
-                width: 25%;
-            }
-            #thought {
-                position: absolute;
-                visibility: hidden;
-                top:-2vh;
-                left:7vw;
-                height: 85%;
-            }
-        </style>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Page Title</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+        <!-- Bootstrap CDN -- CSS/JQUERY/POPPER/JS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="CSS/hangman.css">
+
     </head>
-    <body id="bck">
+
+    <body id="bck" >
+
+        <!-- Score display + Name Entry Modal --- Loads on End Game Click -->
+
+        <div id="endModal" class="modal fade endScreen" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="container mt-5">
+                        <div class="row">
+                        <div class="col-3"></div>
+                        <h3 class="col text-center">Thanks for Playing!</h3>
+                        <div class="col-3"></div>
+                        </div>
+                        <div class="row mt-4">
+                        <div class="col"></div>
+                        <h5 id="scoreOutput" class="col text-center"></h5>
+                        <div class="col"></div>
+                        </div>
+                        <div class="row mt-4">
+                        <div class="col text-right">
+                            <p>Enter Name</p>
+                        </div>
+                        <div class = "col-3 ">
+                            <input type="text" id = "nameTextBox">
+                        </div>
+                        <div class="col"></div>
+                        </div>
+                        <div class="modal-footer mt-5">
+                        <button type="button" class="btn btn-primary" onclick="getName(); leaderBoardScreen()">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LeaderBoard Modal from firebase collection --- Loads once name saved -->
+
+        <div id="leaderBoardModal" class="modal fade leaders" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row">
+                            <h1 class="col-12 text-center mt-3">Current High Scores</h1>
+                        </div>
+                        <div class="row">
+                        <div class="col"></div>
+                            <div class="col mt-3 mb-3" style="text-align:center">
+                                <h4 id="rank1"></h4>
+                                <h4 id="rank2"></h4>
+                                <h4 id="rank3">Loading...</h4>
+                                <h4 id="rank4"></h4>
+                                <h4 id="rank5"></h4>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- The div holds the letter buttons at the bottom middle of the screen. -->
+
         <div id="buttons"></div>
-        <button id="start" onclick="startGame()">Start Game</button>
+        <button id="start" onclick="startGame(); pullLB(); getWords()">Start Game</button>
         <button id="restart" onclick="restart()">Restart Game</button>
+        <button id="end" onclick="endScreen()">End Game</button>
+
+        <!--Images -->
 
         <img id="player" src="Images/start.png">
         <img id="rocket" src="Images/nasa.png">
-        <img id="smoke" src="Images/rocketsmoke.png">
+        <img id="smoke" src="Images/smoke.png">
+        <img id="smoke" src="Images/smoke.png">
         <img id="thought" src="Images/thinker.png">
         
+
         <div id="screen">
             <p id="quest"><i>What is the password to the teleporter?</i></p>
             <p id="dash"></p>
@@ -156,9 +113,9 @@
         <img id="port">
         <img id="platform" src="Images/platform.png">
 
-        <!-- Hidden Elements for Firebase -->
         
-        <!-- Hidden Elements for Firebase -->
+        
+        <!-- Audio -->
 
         <audio id="theme">
             <source src="Audio/theme.mp3" type="audio/mpeg">
@@ -168,7 +125,10 @@
             <source src="" type="audio/mpeg">
         </audio>
 
-        <script src="Scripts/script.js">
-        </script>
+        <!-- Scripts -->
+        <script src="Scripts/firebase.js"></script>
+        <script src="Scripts/firebaseFunctions.js"></script>
+        <script src="Scripts/script.js"></script>
+
     </body>
 </html>
