@@ -48,7 +48,7 @@ html {
     position: absolute;
     visibility: hidden;
     top:65vh;
-    left:8vw;
+    left:2vw;
     width: 20%;
     height: 35%;
     z-index: 3;
@@ -105,16 +105,16 @@ html {
 #dash {
     position: absolute;
     visibility: hidden;
-    top: 22vh;
+    top: 24vh;
     left:14vw;
     font-size: 2vw;
     height: 85%;
-    width: 20%;
+    width: 30%;
 }
 #define {
     position: absolute;
     visibility: hidden;
-    top: 28vh;
+    top: 30vh;
     left:14vw;
     font-size: 1.5vw;
     height: 85%;

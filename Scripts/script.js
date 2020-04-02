@@ -4,13 +4,14 @@ const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
 let player = {x: 5, y: 72, platX: 4, platY: 65}; //Players location on the screen
-let origin = {x: 5, y: 72, platX: 4, platY: 65}; //For restarting back to origin positions.
+let origin = {x: 5, y: 72, platX: 4, platY: 65, rocket: 22, smoke: 89}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
 let storeWord = ""; //Stores the word input by the firebase.
 let wordDashes = []; //Array containing dashes matching word-length.
 let shakeCount = 0; //Used to stop shaking after launch.
 let userScore = 0;
 let index;
+let restartFlag = false; //Used to stop liftoff during restart.
 
 //---------------------------------Word List------------------------------
 //Nested Array containing word and it's accompanying definition.
@@ -49,14 +50,15 @@ function startGame() {
     document.getElementById("quest").style.visibility = "visible";
     document.getElementById("define").style.visibility = "visible";
     document.getElementById("dash").style.visibility = "visible";
+    document.getElementById("platform").style.visibility = "visible";
     getWords();
     buttonMaker();
-    liftoff();
 }
 
 function restart() {
+    restartFlag = true;
     tries = 7;
-    shakeCount = 3000;
+    shakeCount = 1500;
     failsound.volume = 0;
 
     player = {x: -5, y: 72, platX: 4, platY: 65};
@@ -74,6 +76,38 @@ function restart() {
 
     document.getElementById("player").style.top = origin.y + "vh";
     document.getElementById("platform").style.top = origin.textY + "vh";
+    document.getElementById("rocket").style.top = origin.rocket + "vh";
+    document.getElementById("smoke").style.top = origin.smoke + "vh";
+
+    let clearDiv = document.getElementById("buttons");
+    while (clearDiv.firstChild) {
+        clearDiv.removeChild(clearDiv.lastChild);
+      }
+    startGame();
+}
+
+function nextRound() {
+    restartFlag = true;
+    shakeCount = 1500;
+    failsound.volume = 0;
+
+    player = {x: -5, y: 72, platX: 4, platY: 65};
+    document.getElementById("buttons").style.visibility = "visible";
+    document.getElementById("shout").style.visibility = "hidden";
+    document.getElementById("answer").style.visibility = "hidden";
+    document.getElementById("endimg").style.visibility ="hidden";
+    
+    document.getElementById("player").style.left = origin.x + "vw";
+    document.getElementById("thought").style.left = origin.bubbleX + "vw";
+    document.getElementById("quest").style.left = origin.textX + "vw";
+    document.getElementById("define").style.left = origin.textX + "vw";
+    document.getElementById("dash").style.left = origin.textX + "vw";
+    document.getElementById("platform").style.left = origin.platX + "vw";
+
+    document.getElementById("player").style.top = origin.y + "vh";
+    document.getElementById("platform").style.top = origin.textY + "vh";
+    document.getElementById("rocket").style.top = origin.rocket + "vh";
+    document.getElementById("smoke").style.top = origin.smoke + "vh";
 
     let clearDiv = document.getElementById("buttons");
     while (clearDiv.firstChild) {
@@ -94,6 +128,7 @@ function endScreen() {
 //Handles button clicks and current game state changes from the click.
 function controller(btn, letter) {
     return function buttonClick() {
+        restartFlag = false;
         shakeCount = 0;
         btn.setAttribute('class', "dead");
         btn.disabled = true;
@@ -207,6 +242,9 @@ function win() {
     document.getElementById("define").style.visibility = "hidden";
     document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
+    warningS.src = "Audio/rocket.mp3";
+    warningS.volume = VOLUME;
+    warningS.play();
 
     setTimeout(function () {
         teleport();
@@ -215,10 +253,21 @@ function win() {
     setTimeout(function () {
         shake();
     }, 4200);
+    setTimeout(function () {
+        liftoff();
+    }, 4200);
+    setTimeout(function () {
+        nextRound();
+    }, 9500);
 }
 
 // Rocket liftoff
 function liftoff() {
+    if (restartFlag) {
+        clearInterval(id2);
+        clearInterval(id);
+        return;
+    }
     let rocketShip = document.getElementById("rocket");
     let smoke = document.getElementById("smoke");
     smoke.style.visibility="visible";
@@ -227,6 +276,11 @@ function liftoff() {
     let id = setInterval(rocketUp, 50);
     let id2 = setInterval(smokeUp, 50);
     function rocketUp() {
+        if (restartFlag) {   
+            clearInterval(id2);
+            clearInterval(id);
+            return;
+        }
         if (rocketPos == -300) {
             clearInterval(id);
         } else {
@@ -235,6 +289,11 @@ function liftoff() {
         }
     }
     function smokeUp() {
+        if (restartFlag) {
+            clearInterval(id2);
+            clearInterval(id);
+            return;
+        }
         if (smokePos == -10) {
             clearInterval(id2);
         } else {
@@ -265,10 +324,6 @@ function throwAlert() {
             warningS.play();
             break;
         case 0:
-            warningS.src = "Audio/rocket.mp3";
-            warningS.volume = VOLUME + 0.30;
-            themeOST.volume = VOLUME - OPENOFFSET;
-            warningS.play();
             endGame();
             
     }
@@ -277,7 +332,7 @@ function throwAlert() {
 //Shakes elements on the screen at the time of rocket launch.
 function shake () {
     shakeCount++;
-    if (shakeCount > 3000) {
+    if (shakeCount > 1500) {
         return;
     }
     let range1 = Math.random() * SHAKE - SHAKE;
