@@ -1,0 +1,129 @@
+html {
+    overflow: hidden;
+}
+#bck {
+    background-image: url(../Images/main.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.dead {
+    background-color:darkslategrey;
+    color: white;
+    width: 4vw;
+    height: 6vh;
+}
+.btnz {
+    width: 4vw;
+    height: 6vh;
+}
+#buttons {
+    position: absolute;
+    top: 73vh;
+    width: 30vw;
+    left: 38vw;
+    z-index: 4;
+}
+#player {
+    position: absolute;
+    top:72vh;
+    left:5vw;
+    width: 10%;
+    height: 20%;
+}
+#rocket {
+    position: absolute;
+    top:22vh;
+    left:80vw;
+    height: 80%;
+    width: 20%;
+}
+#smoke {
+    position: absolute;
+    top:89vh;
+    left:65vw;
+    height: 120%;
+    visibility: hidden;
+}
+#port {
+    position: absolute;
+    visibility: hidden;
+    top:65vh;
+    left:8vw;
+    width: 20%;
+    height: 35%;
+    z-index: 3;
+}
+#platform {
+    position: absolute;
+    top:65vh;
+    left:4vw;
+    height: 35%;
+    z-index: 2;
+}
+#game {
+    position: absolute;
+    visibility: hidden;
+    top:22vh;
+    left:50vw;
+    width: 40vw;
+    height: 50vh;
+}
+#box {
+    position: absolute;
+    visibility: hidden;
+    z-index: 5;
+    font-size: 1.5vw;
+    top:42vh;
+    left:50vw;
+    width: 15vw;
+    height: 3vh;
+    background-color: black;
+    color: lime;
+}
+#start {
+    position: absolute;
+    z-index: 5;
+    top: 0vh;
+    left: 45vw;
+}
+#restart {
+    position: absolute;
+    visibility: hidden;
+    z-index: 5;
+    top: 0vh;
+    left: 45vw;
+}
+#quest{
+    position: absolute;
+    visibility: hidden;
+    top: 13vh;
+    left:14vw;
+    font-size: 2vw;
+    height: 85%;
+    width: 20%;
+}
+#dash {
+    position: absolute;
+    visibility: hidden;
+    top: 22vh;
+    left:14vw;
+    font-size: 2vw;
+    height: 85%;
+    width: 20%;
+}
+#define {
+    position: absolute;
+    visibility: hidden;
+    top: 28vh;
+    left:14vw;
+    font-size: 1.5vw;
+    height: 85%;
+    width: 25%;
+}
+#thought {
+    position: absolute;
+    visibility: hidden;
+    top:-2vh;
+    left:7vw;
+    height: 85%;
+}
