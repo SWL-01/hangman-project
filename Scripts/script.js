@@ -35,6 +35,7 @@ let failsound = document.getElementById("fail"); // The sound when user lose.
 
 //Part ! -------------------Game Start Function-------------------------
 function startGame() {
+    checkOrientation();
     themeOST.volume = VOLUME;
     themeOST.currentTime = 0;
     themeOST.play();
@@ -59,6 +60,7 @@ function startGame() {
 }
 
 function restart() {
+    checkOrientation();
     firstRun = true;
     restartFlag = true;
     tries = 7;
@@ -92,6 +94,7 @@ function restart() {
 }
 
 function nextRound() {
+    checkOrientation();
     restartFlag = true;
     shakeCount = 1500;
     failsound.volume = 0;
@@ -121,6 +124,12 @@ function nextRound() {
         clearDiv.removeChild(clearDiv.lastChild);
       }
     startGame();
+}
+
+function checkOrientation() {
+    if(window.innerHeight > window.innerWidth){
+        alert("Please use Landscape!");
+    }
 }
 
 //Score display function
