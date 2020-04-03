@@ -41,10 +41,12 @@ function updateLB(currLeads, currName, spot) {
 function getName() {
     if (userName.value === "") {
         alert("Enter Name to Save"); //User cannot have empty Name (Spaces pass through)
+        return;
     } else {
         console.log(userName.value);
         leader(userName.value);
         pullLB();
+        leaderBoardScreen();
     }
 }
 
@@ -63,11 +65,7 @@ function leader(name) {
     }
 }
 
-//Reveals up to date leaderboard
-function leaderBoardScreen() {
-    $('#endModal').modal('hide');
-    $('#leaderBoardModal').modal('show');
-} 
+
 
 //Part F ---------------------------------------------------------------
 

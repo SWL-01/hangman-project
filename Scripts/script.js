@@ -21,8 +21,7 @@ let wordArray = [["spaceship","ships made by Elon Musk"],["alien","Space dude wi
 ["universe","EVERYTHING"],["committee","a group of people appointed for a specific function, typically consisting of members of a larger group."],
 ["spaceship","ships made by Elon Musk"],["gravity","the force that attracts a body toward the center of the earth"],
 ["comet","a celestial object consisting of a nucleus of ice and dust"],["planet","a celestial body moving in an elliptical orbit around a star."],
-["constellation","a group of stars forming a recognizable pattern"],["milkywaygalaxy","the galaxy we live in"],
-["spaceship","the branch of science which deals with celestial objects, space, and the physical universe as a whole"]];
+["milkyway","the galaxy we live in"]];
 
 
 let themeOST = document.getElementById("theme"); //The main background song; change source in HTML, not here.
@@ -54,6 +53,7 @@ function startGame() {
     document.getElementById("define").style.visibility = "visible";
     document.getElementById("dash").style.visibility = "visible";
     document.getElementById("platform").style.visibility = "visible";
+    document.getElementById("end").style.visibility = "visible";
     getWords();
     buttonMaker();
 }
@@ -70,6 +70,7 @@ function restart() {
     document.getElementById("shout").style.visibility = "hidden";
     document.getElementById("answer").style.visibility = "hidden";
     document.getElementById("endimg").style.visibility ="hidden";
+    document.getElementById("end").style.visibility = "visible";
     
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -96,10 +97,12 @@ function nextRound() {
     failsound.volume = 0;
 
     player = {x: -5, y: 72, platX: 4, platY: 65};
+    
     document.getElementById("buttons").style.visibility = "visible";
     document.getElementById("shout").style.visibility = "hidden";
     document.getElementById("answer").style.visibility = "hidden";
     document.getElementById("endimg").style.visibility ="hidden";
+    document.querySelector("#end").style.visibility = "visible";
     
     document.getElementById("player").style.left = origin.x + "vw";
     document.getElementById("thought").style.left = origin.bubbleX + "vw";
@@ -122,6 +125,7 @@ function nextRound() {
 
 //Score display function
 function endScreen() {
+    document.querySelector("#end").style.visibility = "hidden";
     firstRun = true;
     document.querySelector("#scoreOutput").innerHTML = "Score: " + userScore;
     $('#endModal').modal('show');
@@ -386,7 +390,7 @@ function teleport () {
 function endGamemessage() {
     let indexnum = index;
     let answer = wordArray[indexnum][0].toUpperCase()
-    document.getElementById("answer").innerHTML="Oh, right!" + "<br>" + "The password was " + answer + "!";
+    document.getElementById("answer").innerHTML="The password was... " + answer + "!";
     console.log(answer);
 }
 
@@ -406,10 +410,18 @@ function endGame () {
     document.getElementById("shout").style.visibility = "visible";
     document.getElementById("answer").style.visibility = "visible";
 
+    themeOST.pause();
     failsound.currentTime = 0;
     failsound.volume = VOLUME - OPENOFFSET;
     failsound.play();
     endGamemessage();
+    setTimeout(endScreen, 2000);
 }
 
+//Reveals up to date leaderboard
+function leaderBoardScreen() {
+    $('#endModal').modal('hide');
+    $('#leaderBoardModal').modal('show');
+    
+} 
 //Part D ---------------------------------------------------------------

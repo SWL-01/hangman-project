@@ -24,7 +24,7 @@
     <body id="bck" >
 
         <!-- Score display + Name Entry Modal --- Loads on End Game Click -->
-
+    <div id = gameContainer>
         <div id="endModal" class="modal fade endScreen" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -49,7 +49,7 @@
                         <div class="col"></div>
                         </div>
                         <div class="modal-footer mt-5">
-                        <button type="button" class="btn btn-primary" onclick="getName(); leaderBoardScreen()">Save</button>
+                        <button type="button" id="save" class="btn btn-primary" onclick="getName()">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
         <div id="buttons"></div>
         <button id="start" onclick="startGame(); pullLB(); getWords()">Start Game</button>
         <button id="restart" onclick="restart()">Restart Game</button>
-        <button id="end" onclick="endScreen()">End Game</button>
+        <button id="end" onclick="endGame()">End Game</button>
 
         <!--Images -->
 
@@ -102,7 +102,6 @@
         <img id= "endimg" src="Images/panic.png">
         <img id="shout" src="Images/shout.png">
         <img id="game" src="Images/gamescreen.png">
-
 
         <div id="screen">
             <p id="quest"><i>What is the password to the teleporter?</i></p>
@@ -136,6 +135,8 @@
         <audio id = "fail">
             <source src = "Audio/no god.mp3" type="audio/mpeg">
         </audio>
+    </div>
+    
 
         <!-- Scripts -->
         <script src="Scripts/firebase.js"></script>
