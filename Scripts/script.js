@@ -12,6 +12,7 @@ let shakeCount = 0; //Used to stop shaking after launch.
 let userScore = 0;
 let index;
 let restartFlag = false; //Used to stop liftoff during restart.
+let firstRun = true; //Used to control opening audio.
 
 //---------------------------------Word List------------------------------
 //Nested Array containing word and it's accompanying definition.
@@ -41,7 +42,9 @@ function startGame() {
     warningS.src = "Audio/goal.mp3";
     warningS.currentTime = 0;
     warningS.volume = VOLUME - OPENOFFSET;
-    warningS.play();
+    if (firstRun) {
+        warningS.play();
+    }
 
     document.getElementById("start").style.visibility = "hidden";
     document.getElementById("player").style.visibility = "visible";
@@ -56,6 +59,7 @@ function startGame() {
 }
 
 function restart() {
+    firstRun = true;
     restartFlag = true;
     tries = 7;
     shakeCount = 1500;
@@ -118,6 +122,7 @@ function nextRound() {
 
 //Score display function
 function endScreen() {
+    firstRun = true;
     document.querySelector("#scoreOutput").innerHTML = "Score: " + userScore;
     $('#endModal').modal('show');
 }
@@ -231,9 +236,16 @@ function enterPassword(ele) {
 
 //Activates the win state of the game by hiding elements, teleporting player, and launching rocket.
 function win() {
-    warningS.src = "Audio/granted.mp3";
-    warningS.volume = VOLUME - OPENOFFSET;
-    warningS.play();
+    if (firstRun) {
+        warningS.src = "Audio/granted.mp3";
+        warningS.volume = VOLUME - OPENOFFSET;
+        warningS.play();
+        firstRun = false;
+    } else {
+        warningS.src = "Audio/pc.mp3";
+        warningS.volume = VOLUME - OPENOFFSET;
+        warningS.play();
+    }
 
     //Hides elements on screen
     document.getElementById("thought").style.visibility = "hidden";
@@ -242,23 +254,24 @@ function win() {
     document.getElementById("define").style.visibility = "hidden";
     document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
-    warningS.src = "Audio/rocket.mp3";
-    warningS.volume = VOLUME;
-    warningS.play();
+    
 
     setTimeout(function () {
         teleport();
-    }, 3000);
+    }, 3200);
 
     setTimeout(function () {
+        warningS.src = "Audio/rocket.mp3";
+        warningS.volume = VOLUME;
+        warningS.play();
         shake();
-    }, 4200);
+    }, 4400);
     setTimeout(function () {
         liftoff();
-    }, 4200);
+    }, 4400);
     setTimeout(function () {
         nextRound();
-    }, 9500);
+    }, 9700);
 }
 
 // Rocket liftoff
@@ -351,6 +364,9 @@ function shake () {
 //If the player wins, they get teleported into the ship.
 function teleport () {
     //Portal gif starts
+    warningS.src = "Audio/portal.mp3";
+    warningS.volume = VOLUME;
+    warningS.play();
     document.getElementById("port").style.visibility = "visible";
     document.getElementById("port").src= "Images/portal.gif";
 
