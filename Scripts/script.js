@@ -61,6 +61,7 @@ function startGame() {
 
 function restart() {
     checkOrientation();
+    userscore = 0;
     firstRun = true;
     restartFlag = true;
     tries = 7;

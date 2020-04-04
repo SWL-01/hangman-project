@@ -131,7 +131,7 @@ html {
 }
 #endimg {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 0;
     right: 0;
     margin-right: auto;
@@ -140,7 +140,7 @@ html {
     width: 20vw;
     visibility: hidden;
 }
-#answer{
+/* #answer{
     position: absolute;
     top: 10vh;
     left: 0vw;
@@ -150,25 +150,28 @@ html {
     font-family: fantasy;
     visibility: hidden;
     text-align: center;
-}
+} */
 
 #shout {
     position: absolute;
     visibility: hidden;
-    top: 4vh;
-    left: 30vw;
-    height: 60vh;
-}
-
-#endmessage {
-    position: absolute;
-    top: 20vh;
+    top: 11%;
     width: 30vw;
-    height: 43vh;
+    height: 40vh;
     left: 0;
     right: 0;
     margin-right: auto;
     margin-left: auto;
+}
+
+#answer {
+    position: relative;
+    visibility: hidden;
+    text-align: center;
+    top: 25%;
+    left: -1vw;
+    font-size: 1.5vw;
+    font-family: fantasy;
 }
 
 #end {
