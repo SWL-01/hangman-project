@@ -3,8 +3,8 @@ const VOLUME = 0.5; //Main theme volume constant.
 const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
-let player = {x: 5, y: 72, platX: 4, platY: 65}; //Players location on the screen
-let origin = {x: 5, y: 72, platX: 4, platY: 65, rocket: 22, smoke: 89}; //For restarting back to origin positions.
+let player = {x: 5, y: 72, platX: 8, platY: 3}; //Players location on the screen
+let origin = {x: 5, y: 72, platX: 8, platY: 3, rocket: 22, smoke: 89}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
 let storeWord = ""; //Stores the word input by the firebase.
 let wordDashes = []; //Array containing dashes matching word-length.
@@ -61,14 +61,14 @@ function startGame() {
 
 function restart() {
     checkOrientation();
-    userscore = 0;
+    userScore = 0;
     firstRun = true;
     restartFlag = true;
     tries = 7;
     shakeCount = 1500;
     failsound.volume = 0;
 
-    player = {x: -5, y: 72, platX: 4, platY: 65};
+    player = origin;
     document.getElementById("buttons").style.visibility = "visible";
     document.getElementById("shout").style.visibility = "hidden";
     document.getElementById("answer").style.visibility = "hidden";
@@ -83,7 +83,7 @@ function restart() {
     document.getElementById("platform").style.left = origin.platX + "vw";
 
     document.getElementById("player").style.top = origin.y + "vh";
-    document.getElementById("platform").style.top = origin.textY + "vh";
+    document.getElementById("platform").style.bottom = origin.platY + "vh";
     document.getElementById("rocket").style.top = origin.rocket + "vh";
     document.getElementById("smoke").style.top = origin.smoke + "vh";
 
@@ -100,7 +100,7 @@ function nextRound() {
     shakeCount = 1500;
     failsound.volume = 0;
 
-    player = {x: -5, y: 72, platX: 4, platY: 65};
+    player = origin;
     
     document.getElementById("buttons").style.visibility = "visible";
     document.getElementById("shout").style.visibility = "hidden";
@@ -116,7 +116,7 @@ function nextRound() {
     document.getElementById("platform").style.left = origin.platX + "vw";
 
     document.getElementById("player").style.top = origin.y + "vh";
-    document.getElementById("platform").style.top = origin.textY + "vh";
+    document.getElementById("platform").style.bottom = origin.platY + "vh";
     document.getElementById("rocket").style.top = origin.rocket + "vh";
     document.getElementById("smoke").style.top = origin.smoke + "vh";
 
@@ -219,7 +219,7 @@ function updateDash(letter) {
         if (storeWord[i] == letter) {
             wordDashes[i] = letter + " ";
             letterFlag = true;
-            userScore += 2; //increment score on failed guess
+            userScore += 1; //increment score on correct guess
         }
         document.getElementById("dash").innerHTML += wordDashes[i];
         if (wordDashes[i] != "- ") {
@@ -270,22 +270,41 @@ function win() {
     document.getElementById("box").style.visibility = "hidden";
     
 
-    setTimeout(function () {
-        teleport();
-    }, 3200);
+    if (firstRun) {
+        setTimeout(function () {
+            teleport();
+        }, 3200);
+    
+        setTimeout(function () {
+            warningS.src = "Audio/rocket.mp3";
+            warningS.volume = VOLUME;
+            warningS.play();
+            shake();
+        }, 4400);
+        setTimeout(function () {
+            liftoff();
+        }, 4400);
+        setTimeout(function () {
+            nextRound();
+        }, 9700);
+    } else {
+        setTimeout(function () {
+            teleport();
+        }, 1500);
 
-    setTimeout(function () {
-        warningS.src = "Audio/rocket.mp3";
-        warningS.volume = VOLUME;
-        warningS.play();
-        shake();
-    }, 4400);
-    setTimeout(function () {
-        liftoff();
-    }, 4400);
-    setTimeout(function () {
-        nextRound();
-    }, 9700);
+        setTimeout(function () {
+            warningS.src = "Audio/rocket.mp3";
+            warningS.volume = VOLUME;
+            warningS.play();
+            shake();
+        }, 2700);
+        setTimeout(function () {
+            liftoff();
+        }, 2700);
+        setTimeout(function () {
+            nextRound();
+        }, 8000);
+    }
 }
 
 // Rocket liftoff
@@ -370,7 +389,7 @@ function shake () {
     document.getElementById("platform").style.left = player.platX + range2 + "vw";
 
     document.getElementById("player").style.top = player.y + range4 + "vh";
-    document.getElementById("platform").style.top = player.platY + range3 + "vh";
+    document.getElementById("platform").style.bottom = player.platY + range3 + "vh";
     
     setTimeout(shake,5);
 }
@@ -432,6 +451,6 @@ function endGame () {
 function leaderBoardScreen() {
     $('#endModal').modal('hide');
     $('#leaderBoardModal').modal('show');
-    
+
 } 
 //Part D ---------------------------------------------------------------

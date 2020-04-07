@@ -1,183 +1,239 @@
-html {
+@media all and (orientation:portrait) {
+    #bck {
+        position:relative;
+        background-image: url(../Images/main.png);
+        background-size: 100vw 100vh;
+    } 
+    #gameContainer {
+        display:none;
+    }
+    #landscapeAlert {
+        position:absolute;
+        top:50vh;
+}
+
+}
+@media all and (orientation:landscape) {
+    html {
     overflow: hidden;
-}
-#gameContainer {
-    position:absolute;
-    width:100vw;
-    height:100vh;
-    border:1px solid black;
-    background-image: url(../Images/main.png);
-    background-size: 100vw 100vh;
-    background-repeat: no-repeat;
-}
-.dead {
-    background-color:darkslategrey;
-    color: white;
-    width: 4vw;
-    height: 6vh;
-}
-.btnz {
-    width: 4vw;
-    height: 6vh;
-}
-#buttons {
-    position: absolute;
-    top: 73vh;
-    width: 30vw;
-    left: 38vw;
-    z-index: 4;
-}
-#player {
-    position: absolute;
-    top:72vh;
-    left:5vw;
-    width: 10vw;
-}
-#rocket {
-    position: absolute;
-    top:22vh;
-    left:80vw;
-    width: 20vw;
-}
-#smoke {
-    position: absolute;
-    top:89vh;
-    left:65vw;
-    height: 120vh;
-    visibility: hidden;
-}
-#port {
-    position: absolute;
-    visibility: hidden;
-    top:65vh;
-    left:2vw;
-    width: 20vw;
-    height: 35vh;
-    z-index: 3;
-}
-#platform {
-    position: absolute;
-    top:65vh;
-    left:4vw;
-    height: 35vh;
-    z-index: 2;
-}
-#game {
-    position: absolute;
-    visibility: hidden;
-    top:22vh;
-    left:50vw;
-    width: 40vw;
-    height: 50vh;
-}
-#box {
-    position: absolute;
-    visibility: hidden;
-    z-index: 5;
-    font-size: 1.5vw;
-    top:42vh;
-    left:50vw;
-    width: 15vw;
-    height: 3vh;
-    background-color: black;
-    color: lime;
-}
-#start {
-    position: absolute;
-    z-index: 5;
-    top: 0vh;
-    left: 45vw;
-}
-#restart {
-    position: absolute;
-    visibility: hidden;
-    z-index: 5;
-    top: 0vh;
-    left: 45vw;
-}
-#quest{
-    position: absolute;
-    visibility: hidden;
-    top: 13vh;
-    left:14vw;
-    font-size: 2vw;
-    height: 85%;
-    width: 20%;
-}
-#dash {
-    position: absolute;
-    visibility: hidden;
-    top: 24vh;
-    left:14vw;
-    font-size: 2vw;
-    height: 85%;
-    width: 30%;
-}
-#define {
-    position: absolute;
-    visibility: hidden;
-    top: 30vh;
-    left:14vw;
-    font-size: 1.5vw;
-    height: 85%;
-    width: 25%;
-}
-#thought {
-    position: absolute;
-    visibility: hidden;
-    top:-2vh;
-    left:7vw;
-    height: 85vh;
-}
-#endimg {
-    position: absolute;
-    top: 35%;
-    left: 0;
-    right: 0;
-    margin-right: auto;
-    margin-left: auto;
-    height: 40vh;
-    width: 20vw;
-    visibility: hidden;
-}
-/* #answer{
-    position: absolute;
-    top: 10vh;
-    left: 0vw;
-    height: 50vh;
-    width: 30vw;
-    font-size: 1.5vw;
-    font-family: fantasy;
-    visibility: hidden;
-    text-align: center;
-} */
+    }
+    #landscapeAlert {
+            display:none;
+    }
+    #gameContainer {
+        position:absolute;
+        width:100vw;
+        height:100vh;
+        border:1px solid black;
+        background-image: url(../Images/main.png);
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;
+    }
+    .dead {
+        background-color:darkslategrey;
+        color: white;
+        width: 6vw;
+        height: 6vh;
+    }
+    .btnz {
+        width: 6vw;
+        height: 6vh;
+    }
+    #buttons {
+        position: absolute;
+        bottom:10vh;
+        width: 26vw;
+        left: 45vw;
+        z-index: 4;
+    }
 
-#shout {
-    position: absolute;
-    visibility: hidden;
-    top: 11%;
-    width: 30vw;
-    height: 40vh;
-    left: 0;
-    right: 0;
-    margin-right: auto;
-    margin-left: auto;
-}
+    #player {
+        position: absolute;
+        bottom:5vh;
+        left:5vw;
+        width: 10em;
+    }
+    #rocket {
+        position: absolute;
+        bottom:2vh;
+        right:5vw;
+        width: 20em;
+    }
+    #smoke {
+        position: absolute;
+        top:89vh;
+        left:50vw;
+        height: 120vh;
+        /* visibility: hidden; */
+    }
+    #port {
+        position: absolute;
+        visibility: hidden;
+        top:65vh;
+        left:2vw;
+        width: 20vw;
+        height: 35vh;
+        z-index: 3;
+    }
+    #platform {
+        position: absolute;
+        bottom:3vh;
+        left:8vw;
+        width:20em;
+        z-index: 2;
+    }
+    #game {
+        position: absolute;
+        visibility: hidden;
+        top:22vh;
+        left:50vw;
+        width: 40vw;
+        height: 50vh;
+    }
+    #box {
+        position: absolute;
+        visibility: hidden;
+        z-index: 5;
+        font-size: 1.5vw;
+        top:42vh;
+        left:50vw;
+        width: 15vw;
+        height: 3vh;
+        background-color: black;
+        color: lime;
+    }
+    #start {
+        position: absolute;
+        z-index: 5;
+        top: 0vh;
+        left: 45vw;
+    }
+    #screen {
+        position:relative;
+        width:40vw;
+        height:40vh;
+    }
+    #restart {
+        position: absolute;
+        visibility: hidden;
+        z-index: 5;
+        top: 0vh;
+        left: 45vw;
+    }
 
-#answer {
-    position: relative;
-    visibility: hidden;
-    text-align: center;
-    top: 25%;
-    left: -1vw;
-    font-size: 1.5vw;
-    font-family: fantasy;
-}
+    #gameText {
+        display:relative;
+        width:40vw;
+        height:40vh;
+        top:50vw;
+    }
 
-#end {
-    visibility:hidden;
-}
+    @media screen and (max-width: 1200px) {
+        #quest{
+            position: absolute;
+            visibility: hidden;
+            top: 16vh;
+            left:12vw;
+            font-size: 2.5vw;
+            height: 85vh;
+            width: 25vw;
+        }
+        #dash {
+            position: absolute;
+            visibility: hidden;
+            top: 26vh;
+            left:14vw;
+            font-size: 3vw;
+            height: 85vh;
+            width: 80vw;
+        }
+    
+        #define {
+            position: absolute;
+            visibility: hidden;
+            top: 32vh;
+            left:14vw;
+            font-size: 2vw;
+            height: 85vh;
+            width: 25vw;
+        }
+    }
+    @media screen and (min-width:1200px) {
+        #quest{
+            position: absolute;
+            visibility: hidden;
+            top: 15vh;
+            left:12vw;
+            font-size: 2vw;
+            height: 85vh;
+            width: 25vw;
+        }
+        #dash {
+            position: absolute;
+            visibility: hidden;
+            top: 30vh;
+            left:12vw;
+            font-size: 2vw;
+            height: 85vh;
+            width: 80vw;
+        }
+    
+        #define {
+            position: absolute;
+            visibility: hidden;
+            top: 35vh;
+            left:14vw;
+            font-size: 1.5vw;
+            height: 85vh;
+            width: 25vw;
+        }
+    }
+    
+    #thought {
+        position: absolute;
+        visibility: hidden;
+        top:-2vh;
+        left:7vw;
+        width: 40vw;
+        height: 85vh;
+    }
+    #endimg {
+        position: absolute;
+        top: 35vh;
+        margin-right: auto;
+        margin-left: auto;
+        height: 40vh;
+        width: 20vw;
+        visibility: hidden;
+    }
 
-#leaderBoardModal, #endModal{
-    position:absolute;
+    #shout {
+        position: absolute;
+        visibility: hidden;
+        top: 11%;
+        width: 30vw;
+        height: 40vh;
+        left: 0;
+        right: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #answer {
+        position: relative;
+        visibility: hidden;
+        text-align: center;
+        top: 25%;
+        left: -1vw;
+        font-size: 1.5vw;
+        font-family: fantasy;
+    }
+
+    #end {
+        visibility:hidden;
+    }
+
+    #leaderBoardModal, #endModal{
+        position:absolute;
+    }
 }
