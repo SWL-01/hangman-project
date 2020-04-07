@@ -14,6 +14,7 @@
 
 }
 @media all and (orientation:landscape) {
+
     html {
     overflow: hidden;
     }
@@ -39,6 +40,8 @@
         width: 6vw;
         height: 6vh;
     }
+
+
     #buttons {
         position: absolute;
         bottom:10vh;
@@ -69,10 +72,10 @@
     #port {
         position: absolute;
         visibility: hidden;
-        top:65vh;
-        left:2vw;
-        width: 20vw;
-        height: 35vh;
+        bottom: -5vh;
+        left:0vw;
+        width: 25vw;
+        height: 50vh;
         z-index: 3;
     }
     #platform {
@@ -90,6 +93,28 @@
         width: 40vw;
         height: 50vh;
     }
+
+    @media screen and (max-height: 450px) {
+        .btnz {
+            width: 6vw;
+            height: 8vh;
+        }
+
+        #platform {
+            position: absolute;
+            bottom:3vh;
+            left:8vw;
+            width:20em;
+            z-index: -1;
+        }
+
+        #player {
+            position: absolute;
+            bottom:5vh;
+            left:5vw;
+            width: 8em;
+        }
+    } 
     #box {
         position: absolute;
         visibility: hidden;
@@ -127,67 +152,35 @@
         height:40vh;
         top:50vw;
     }
+    #quest{
+        position: absolute;
+        visibility: hidden;
+        top: 15vh;
+        left:12vw;
+        font-size: 2vw;
+        height: 85vh;
+        width: 25vw;
+    }
+    #dash {
+        position: absolute;
+        visibility: hidden;
+        top: 30vh;
+        left:12vw;
+        font-size: 2vw;
+        height: 85vh;
+        width: 80vw;
+    }
 
-    @media screen and (max-width: 1200px) {
-        #quest{
-            position: absolute;
-            visibility: hidden;
-            top: 16vh;
-            left:12vw;
-            font-size: 2.5vw;
-            height: 85vh;
-            width: 25vw;
-        }
-        #dash {
-            position: absolute;
-            visibility: hidden;
-            top: 26vh;
-            left:14vw;
-            font-size: 3vw;
-            height: 85vh;
-            width: 80vw;
-        }
-    
-        #define {
-            position: absolute;
-            visibility: hidden;
-            top: 32vh;
-            left:14vw;
-            font-size: 2vw;
-            height: 85vh;
-            width: 25vw;
-        }
+    #define {
+        position: absolute;
+        visibility: hidden;
+        top: 35vh;
+        left:14vw;
+        font-size: 1.5vw;
+        height: 85vh;
+        width: 25vw;
     }
-    @media screen and (min-width:1200px) {
-        #quest{
-            position: absolute;
-            visibility: hidden;
-            top: 15vh;
-            left:12vw;
-            font-size: 2vw;
-            height: 85vh;
-            width: 25vw;
-        }
-        #dash {
-            position: absolute;
-            visibility: hidden;
-            top: 30vh;
-            left:12vw;
-            font-size: 2vw;
-            height: 85vh;
-            width: 80vw;
-        }
     
-        #define {
-            position: absolute;
-            visibility: hidden;
-            top: 35vh;
-            left:14vw;
-            font-size: 1.5vw;
-            height: 85vh;
-            width: 25vw;
-        }
-    }
     
     #thought {
         position: absolute;
@@ -197,22 +190,13 @@
         width: 40vw;
         height: 85vh;
     }
-    #endimg {
-        position: absolute;
-        top: 35vh;
-        margin-right: auto;
-        margin-left: auto;
-        height: 40vh;
-        width: 20vw;
-        visibility: hidden;
-    }
 
     #shout {
         position: absolute;
         visibility: hidden;
-        top: 11%;
-        width: 30vw;
-        height: 40vh;
+        top: 25vh;
+        width: 40vw;
+        height: 50vh;
         left: 0;
         right: 0;
         margin-right: auto;
@@ -223,7 +207,7 @@
         position: relative;
         visibility: hidden;
         text-align: center;
-        top: 25%;
+        top: 5vh;
         left: -1vw;
         font-size: 1.5vw;
         font-family: fantasy;
