@@ -3,8 +3,8 @@ const VOLUME = 0.5; //Main theme volume constant.
 const OPENOFFSET = 0.30; //Reduces the opening warning volume.
 const SHAKE = 0.25; //Shake value.
 
-let player = {x: 5, y: 72, platX: 8, platY: 3}; //Players location on the screen
-let origin = {x: 5, y: 72, platX: 8, platY: 3, rocket: 22, smoke: 89}; //For restarting back to origin positions.
+let player = {x: 5, y: 5, platX: 8, platY: 3}; //Players location on the screen
+let origin = {x: 5, y: 5, platX: 8, platY: 3, rocket: 2, smoke: 89}; //For restarting back to origin positions.
 let tries = 7; //Number of tries used by the player.
 let storeWord = ""; //Stores the word input by the firebase.
 let wordDashes = []; //Array containing dashes matching word-length.
@@ -16,12 +16,12 @@ let firstRun = true; //Used to control opening audio.
 
 //---------------------------------Word List------------------------------
 //Nested Array containing word and it's accompanying definition.
-let wordArray = [["spaceship","ships made by Elon Musk"],["alien","Space dude with creepy eyes"],
+let wordArray = [["spaceship","thing you need to enter...like...right now"],["alien","Space dude with creepy eyes"],
 ["astronaut","Person who is trained to travel in a spaceship"],["lunar","of, determined by, or resembling the moon."],
-["universe","EVERYTHING"],["committee","a group of people appointed for a specific function, typically consisting of members of a larger group."],
+["universe","all existing, ever expanding"],["tattoo","a form of body modification where a design is made by inserting ink."],
 ["spaceship","ships made by Elon Musk"],["gravity","the force that attracts a body toward the center of the earth"],
 ["comet","a celestial object consisting of a nucleus of ice and dust"],["planet","a celestial body moving in an elliptical orbit around a star."],
-["milkyway","the galaxy we live in"]];
+["milkyway","the galaxy we live in"], ["electricity", "is the set of physical phenomena associated with the presence and motion of electric charge."]];
 
 
 let themeOST = document.getElementById("theme"); //The main background song; change source in HTML, not here.
@@ -72,7 +72,6 @@ function restart() {
     document.getElementById("buttons").style.visibility = "visible";
     document.getElementById("shout").style.visibility = "hidden";
     document.getElementById("answer").style.visibility = "hidden";
-    document.getElementById("endimg").style.visibility ="hidden";
     document.getElementById("end").style.visibility = "visible";
     
     document.getElementById("player").style.left = origin.x + "vw";
@@ -82,9 +81,9 @@ function restart() {
     document.getElementById("dash").style.left = origin.textX + "vw";
     document.getElementById("platform").style.left = origin.platX + "vw";
 
-    document.getElementById("player").style.top = origin.y + "vh";
+    document.getElementById("player").style.bottom = origin.y + "vh";
     document.getElementById("platform").style.bottom = origin.platY + "vh";
-    document.getElementById("rocket").style.top = origin.rocket + "vh";
+    document.getElementById("rocket").style.bottom = origin.rocket + "vh";
     document.getElementById("smoke").style.top = origin.smoke + "vh";
 
     let clearDiv = document.getElementById("buttons");
@@ -105,7 +104,6 @@ function nextRound() {
     document.getElementById("buttons").style.visibility = "visible";
     document.getElementById("shout").style.visibility = "hidden";
     document.getElementById("answer").style.visibility = "hidden";
-    document.getElementById("endimg").style.visibility ="hidden";
     document.querySelector("#end").style.visibility = "visible";
     
     document.getElementById("player").style.left = origin.x + "vw";
@@ -115,9 +113,9 @@ function nextRound() {
     document.getElementById("dash").style.left = origin.textX + "vw";
     document.getElementById("platform").style.left = origin.platX + "vw";
 
-    document.getElementById("player").style.top = origin.y + "vh";
+    document.getElementById("player").style.bottom = origin.y + "vh";
     document.getElementById("platform").style.bottom = origin.platY + "vh";
-    document.getElementById("rocket").style.top = origin.rocket + "vh";
+    document.getElementById("rocket").style.bottom = origin.rocket + "vh";
     document.getElementById("smoke").style.top = origin.smoke + "vh";
 
     let clearDiv = document.getElementById("buttons");
@@ -186,7 +184,6 @@ function buttonMaker() {
 //Opens the command window for when player reaches the computer.
 function openScreen () {
     document.getElementById("box").value = "";
-    document.getElementById("game").style.visibility = "visible";
     document.getElementById("box").style.visibility = "visible";
 }
 
@@ -266,7 +263,6 @@ function win() {
     document.getElementById("quest").style.visibility = "hidden";
     document.getElementById("dash").style.visibility = "hidden";
     document.getElementById("define").style.visibility = "hidden";
-    document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
     
 
@@ -317,7 +313,7 @@ function liftoff() {
     let rocketShip = document.getElementById("rocket");
     let smoke = document.getElementById("smoke");
     smoke.style.visibility="visible";
-    let rocketPos = 22;
+    let rocketPos = 2;
     let smokePos = 79;
     let id = setInterval(rocketUp, 50);
     let id2 = setInterval(smokeUp, 50);
@@ -330,8 +326,8 @@ function liftoff() {
         if (rocketPos == -300) {
             clearInterval(id);
         } else {
-            rocketPos--;
-            rocketShip.style.top = rocketPos + 'vh';
+            rocketPos++;
+            rocketShip.style.bottom = rocketPos + 'vh';
         }
     }
     function smokeUp() {
@@ -388,7 +384,7 @@ function shake () {
     document.getElementById("player").style.left = player.x + range1 + "vw";
     document.getElementById("platform").style.left = player.platX + range2 + "vw";
 
-    document.getElementById("player").style.top = player.y + range4 + "vh";
+    document.getElementById("player").style.bottom = player.y + range4 + "vh";
     document.getElementById("platform").style.bottom = player.platY + range3 + "vh";
     
     setTimeout(shake,5);
@@ -429,11 +425,9 @@ function endGame () {
     document.getElementById("quest").style.visibility = "hidden";
     document.getElementById("dash").style.visibility = "hidden";
     document.getElementById("define").style.visibility = "hidden";
-    document.getElementById("game").style.visibility = "hidden";
     document.getElementById("box").style.visibility = "hidden";
     document.getElementById("buttons").style.visibility = "hidden";
     document.getElementById("start").style.visibility = "hidden";
-    document.getElementById("endimg").style.visibility ="visible";
     document.getElementById("player").style.visibility = "hidden";
     document.getElementById("platform").style.visibility = "hidden";
     document.getElementById("shout").style.visibility = "visible";
